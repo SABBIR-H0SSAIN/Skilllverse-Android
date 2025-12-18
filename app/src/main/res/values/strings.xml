@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">SkillVerse</string>
+    
+    
+    <string name="login_title">Welcome Back</string>
+    <string name="login_subtitle">Sign in to continue learning</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    
+    
+    <string name="register_title">Create Account</string>
+    <string name="register_subtitle">Join SkillVerse and start learning</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register_button">Register</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    
+    
+    <string name="dashboard_title">Dashboard</string>
+    <string name="welcome_message">Welcome to SkillVerse!</string>
+    <string name="browse_courses">Browse Courses</string>
+    <string name="my_courses">My Courses</string>
+    <string name="logout">Logout</string>
+    
+    
+    <string name="error_empty_email">Email is required</string>
+    <string name="error_invalid_email">Please enter a valid email</string>
+    <string name="error_empty_password">Password is required</string>
+    <string name="error_short_password">Password must be at least 6 characters</string>
+    <string name="error_empty_name">Name is required</string>
+    <string name="error_password_mismatch">Passwords do not match</string>
+    <string name="error_weak_password">Password must contain letters and numbers</string>
+    
+    
+    <string name="login_success">Login successful!</string>
+    <string name="register_success">Registration successful! Please login.</string>
+    
+    
+    <string name="please_wait">Please wait…</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    
+    
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

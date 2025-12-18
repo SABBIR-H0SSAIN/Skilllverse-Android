@@ -1,0 +1,32 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    
+    <style name="Base.Theme.Skillverse_android" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        
+        <item name="colorSecondary">@color/primary_purple</item>
+        <item name="colorSecondaryVariant">@color/primary_purple</item>
+        <item name="colorOnSecondary">@color/white</item>
+        
+        
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/surface_light</item>
+        
+        
+        <item name="android:statusBarColor">@color/gradient_start</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.Skillverse_android" parent="Base.Theme.Skillverse_android" />
+
+    <style name="Theme.Skillverse_android.Admin" parent="Theme.Skillverse_android">
+        <item name="android:statusBarColor">@color/primary_blue</item>
+    </style>
+
+    <style name="Theme.Skillverse_android.UserPanel" parent="Theme.Skillverse_android">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>
