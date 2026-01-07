@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_browse_courses"
+            android:icon="@drawable/ic_nav_browse"
+            android:title="@string/browse_courses" />
+        <item
+            android:id="@+id/nav_my_courses"
+            android:icon="@drawable/ic_nav_my_courses"
+            android:title="@string/my_courses" />
+
+        <item
+            android:id="@+id/nav_certificates"
+            android:icon="@drawable/ic_nav_certificates"
+            android:title="My Certificates" />
+        
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_nav_profile"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_nav_logout"
+            android:title="@string/logout" />
+    </group>
+</menu>

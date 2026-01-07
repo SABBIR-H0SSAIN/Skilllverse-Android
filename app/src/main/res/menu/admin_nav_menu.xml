@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_admin_dashboard"
+            android:icon="@drawable/ic_nav_dashboard"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_admin_courses"
+            android:icon="@drawable/ic_admin_courses"
+            android:title="Manage Courses" />
+        <item
+            android:id="@+id/nav_admin_instructors"
+            android:icon="@drawable/ic_admin_instructors"
+            android:title="Manage Instructors" />
+        <item
+            android:id="@+id/nav_admin_keys"
+            android:icon="@drawable/ic_admin_keys"
+            android:title="Enrollment Keys" />
+        <item
+            android:id="@+id/nav_admin_users"
+            android:icon="@drawable/ic_admin_users"
+            android:title="Manage Users" />
+
+    </group>
+    <item
+        android:id="@+id/nav_admin_logout"
+        android:icon="@drawable/ic_nav_logout"
+        android:title="Logout" />
+</menu>
