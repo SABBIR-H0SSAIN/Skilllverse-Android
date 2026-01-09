@@ -121,6 +121,11 @@
             android:theme="@style/Theme.Skillverse_android.Admin"
             android:screenOrientation="portrait"
             android:parentActivityName=".admin.ManageModulesActivity" />
+        <activity
+            android:name=".CertificateDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Skillverse_android.UserPanel"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

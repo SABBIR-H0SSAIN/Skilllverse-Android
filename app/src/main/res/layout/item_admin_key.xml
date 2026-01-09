@@ -60,7 +60,7 @@
             android:id="@+id/btnCopy"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@android:drawable/ic_menu_save"
+            android:src="@drawable/ic_copy"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Copy Key" />
 

@@ -10,7 +10,7 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
     app:strokeWidth="0dp"
-    app:rippleColor="@color/primary_blue_light">
+    app:rippleColor="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"

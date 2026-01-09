@@ -16,7 +16,7 @@
         android:gravity="center"
         android:layout_marginBottom="24dp" />
 
-    <!-- Name Section -->
+    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         android:background="@color/divider_color"
         android:layout_marginBottom="16dp" />
 
-    <!-- Password Section -->
+    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

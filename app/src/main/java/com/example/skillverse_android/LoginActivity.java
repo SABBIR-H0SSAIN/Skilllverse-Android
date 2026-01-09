@@ -12,18 +12,42 @@ import com.example.skillverse_android.utils.AdminAuthManager;
 import com.example.skillverse_android.utils.FirebaseAuthManager;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseUser;
+import android.content.SharedPreferences;
+
 public class LoginActivity extends AppCompatActivity {
+    private static final String PREF_NAME = "SkillVersePrefs";
+    private static final String KEY_USER_ROLE = "user_role";
     private ActivityLoginBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setDecorFitsSystemWindows(false);
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+         
         if (FirebaseAuthManager.isUserLoggedIn()) {
-            checkUserRoleAndNavigate();
+            SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+            String cachedRole = prefs.getString(KEY_USER_ROLE, null);
+            
+            if (cachedRole != null) {
+                 
+                if ("admin".equals(cachedRole)) {
+                    navigateToAdminDashboard();
+                } else {
+                    navigateToMainActivity();
+                }
+                return;
+            }
+            
+             
+            binding = ActivityLoginBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+            showLoadingState();
+            checkUserRoleAndNavigate(true);
             return;
         }
+
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setupClickListeners();
     }
     private void setupClickListeners() {
@@ -32,10 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
-        binding.tvForgotPassword.setOnClickListener(v -> {
-            // Toast.makeText(this, "Forgot password feature coming soon!", Toast.LENGTH_SHORT).show();
 
-        });
     }
     private void handleLogin() {
         String email = binding.etEmail.getText().toString().trim();
@@ -49,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(FirebaseUser user) {
                 runOnUiThread(() -> {
-                    checkUserRoleAndNavigate();
+                    checkUserRoleAndNavigate(false);
                 });
             }
             @Override
@@ -88,12 +109,28 @@ public class LoginActivity extends AppCompatActivity {
         passwordLayout.setError(null);
         return true;
     }
-    private void checkUserRoleAndNavigate() {
+    private void showLoadingState() {
+        for (int i = 0; i < binding.getRoot().getChildCount(); i++) {
+            binding.getRoot().getChildAt(i).setVisibility(View.GONE);
+        }
+        android.widget.ProgressBar progressBar = new android.widget.ProgressBar(this);
+        binding.getRoot().addView(progressBar);
+    }
+
+    private void checkUserRoleAndNavigate(boolean isAutoLogin) {
         AdminAuthManager.getUserRole(new AdminAuthManager.OnRoleCheckListener() {
             @Override
             public void onRoleCheckComplete(String role) {
-                binding.btnLogin.setEnabled(true);
-                binding.btnLogin.setText(R.string.login_button);
+                 
+                getSharedPreferences(PREF_NAME, MODE_PRIVATE)
+                    .edit()
+                    .putString(KEY_USER_ROLE, role)
+                    .apply();
+
+                if (!isAutoLogin) {
+                    binding.btnLogin.setEnabled(true);
+                    binding.btnLogin.setText(R.string.login_button);
+                }
                 if ("admin".equals(role)) {
                     navigateToAdminDashboard();
 

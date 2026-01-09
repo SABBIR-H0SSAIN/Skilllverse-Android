@@ -23,7 +23,7 @@ public class GenerateKeysDialog extends DialogFragment {
     private List<Course> courseList = new ArrayList<>();
     private OnKeysGeneratedListener listener;
     public interface OnKeysGeneratedListener {
-        void onKeysGenerated();
+        void onKeysGenerated(List<EnrollmentKey> keys);
     }
     public void setOnKeysGeneratedListener(OnKeysGeneratedListener listener) {
         this.listener = listener;
@@ -91,7 +91,7 @@ public class GenerateKeysDialog extends DialogFragment {
                         Toast.makeText(getContext(), count + " keys generated", Toast.LENGTH_SHORT).show();
                     }
                     if (listener != null) {
-                        listener.onKeysGenerated();
+                        listener.onKeysGenerated(data);
                     }
                 }
                 @Override

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/tvCertificateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Certificate Details"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:id="@+id/tvCertificateId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: CID-2023-XYZ"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvCourseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Course: Java Programming"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+    
+    <TextView
+        android:id="@+id/tvStudentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student: John Doe"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvCompletionDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Completed: Jan 01, 2023"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:id="@+id/tvRevokeStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: Active"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvRevokeReason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reason: Violation of terms"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone"
+        android:layout_marginBottom="24dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRevoke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Revoke Certificate"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:visibility="visible"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnUnrevoke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Un-revoke Certificate"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:visibility="gone"/>
+
+</LinearLayout>

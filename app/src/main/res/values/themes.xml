@@ -18,6 +18,10 @@
         
         <item name="android:statusBarColor">@color/gradient_start</item>
         <item name="android:windowLightStatusBar">false</item>
+        
+        
+        <item name="android:colorControlHighlight">@android:color/transparent</item>
+        <item name="colorControlHighlight">@android:color/transparent</item>
     </style>
 
     <style name="Theme.Skillverse_android" parent="Base.Theme.Skillverse_android" />

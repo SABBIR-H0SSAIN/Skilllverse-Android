@@ -1,4 +1,5 @@
 package com.example.skillverse_android.models;
+import com.google.firebase.firestore.PropertyName;
 public class Certificate {
     private String documentId;
     private String id;
@@ -49,4 +50,22 @@ public class Certificate {
     public void setCertificateId(String certificateId) { this.certificateId = certificateId; }
     public void setScore(float score) { this.score = score; }
     public void setCreatedAt(long createdAt) { this.createdAt = createdAt; }
+    private boolean isRevoked;
+    private String revokeReason;
+    private Long revokedAt;
+    private String revokedBy;
+
+    @PropertyName("isRevoked")
+    public boolean isRevoked() { return isRevoked; }
+    @PropertyName("isRevoked")
+    public void setRevoked(boolean revoked) { isRevoked = revoked; }
+
+    public String getRevokeReason() { return revokeReason; }
+    public void setRevokeReason(String revokeReason) { this.revokeReason = revokeReason; }
+
+    public Long getRevokedAt() { return revokedAt; }
+    public void setRevokedAt(Long revokedAt) { this.revokedAt = revokedAt; }
+
+    public String getRevokedBy() { return revokedBy; }
+    public void setRevokedBy(String revokedBy) { this.revokedBy = revokedBy; }
 }

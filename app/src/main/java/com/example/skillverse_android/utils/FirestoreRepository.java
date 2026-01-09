@@ -337,7 +337,7 @@ public class FirestoreRepository {
                 
                 if (totalModulesKnown > 0) {
                      int progress = (completedCount * 100) / totalModulesKnown;
-                     callback.onSuccess(progress);
+                     callback.onSuccess(Math.min(progress, 100));
                      return;
                 }
 
@@ -346,7 +346,7 @@ public class FirestoreRepository {
                     public void onSuccess(List<Module> modules) {
                         int totalModules = modules.size();
                         int progress = totalModules > 0 ? (completedCount * 100) / totalModules : 0;
-                        callback.onSuccess(progress);
+                        callback.onSuccess(Math.min(progress, 100));
                     }
                     @Override
                     public void onFailure(String error) {

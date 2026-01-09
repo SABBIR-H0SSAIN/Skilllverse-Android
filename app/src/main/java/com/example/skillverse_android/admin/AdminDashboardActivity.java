@@ -31,7 +31,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
     private MaterialCardView cardManageInstructors;
     private MaterialCardView cardGenerateKeys;
     private MaterialCardView cardManageUsers;
+
     private FirebaseFirestore db;
+    private static final String PREF_NAME = "SkillVersePrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +89,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
             String email = currentUser.getEmail();
             navHeaderEmail.setText(email);
 
-            // Try to set initial name from Auth
+             
             String displayName = currentUser.getDisplayName();
             if (displayName != null && !displayName.isEmpty()) {
                 navHeaderName.setText(displayName);
@@ -98,7 +100,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
                 navHeaderName.setText("Admin");
             }
 
-            // Fetch latest from Firestore
+             
             db.collection("users").document(currentUser.getUid())
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -110,7 +112,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
                     }
                 })
                 .addOnFailureListener(e -> {
-                    // Keep existing/auth name on failure
+                     
                 });
         }
     }
@@ -144,6 +146,37 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
     protected void onResume() {
         super.onResume();
         loadDashboardStats();
+        verifyAdminAccess();
+    }
+
+    private void verifyAdminAccess() {
+        com.google.firebase.auth.FirebaseUser currentUser = FirebaseAuthManager.getCurrentUser();
+        if (currentUser == null) return;
+        
+        db.collection("users").document(currentUser.getUid())
+            .get()
+            .addOnSuccessListener(documentSnapshot -> {
+                if (!documentSnapshot.exists()) {
+                    handleLogout();
+                } else {
+                    String role = documentSnapshot.getString("role");
+                     
+                    getSharedPreferences(PREF_NAME, MODE_PRIVATE)
+                        .edit()
+                        .putString("user_role", role)
+                        .apply();
+
+                    if (!"admin".equals(role)) {
+                         
+                        Intent intent = new Intent(this, com.example.skillverse_android.MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            })
+            .addOnFailureListener(e -> {
+                
+            });
     }
     private void loadDashboardStats() {
         db.collection("courses")
@@ -221,6 +254,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
     }
     private void handleLogout() {
         FirebaseAuthManager.logoutUser();
+        getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit().clear().apply();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

@@ -24,6 +24,7 @@ import com.example.skillverse_android.utils.FirebaseAuthManager;
 import com.example.skillverse_android.utils.EnrollmentManager;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
+import com.example.skillverse_android.utils.SwipeGestureHelper;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView tvWelcome;
     private CardView cardMyCoursesAction;
     private CardView cardBrowseAction, cardCertificatesAction, cardProfileAction;
+    private SwipeGestureHelper swipeHelper;
 
 
 
@@ -92,6 +94,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         loadLastAccessed();
+        loadLastAccessed();
+        loadRecentCourses();
+        verifyUserAccess();
+    }
+    
+    private void verifyUserAccess() {
+        String userId = FirebaseAuthManager.getCurrentUser().getUid();
+        com.google.firebase.firestore.FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .get()
+            .addOnSuccessListener(documentSnapshot -> {
+                if (!documentSnapshot.exists()) {
+                      
+                     handleLogout();
+                } else {
+                      
+                     String role = documentSnapshot.getString("role");
+                     if (role != null) {
+                         String currentCached = sharedPreferences.getString("user_role", null);
+                         if (!role.equals(currentCached)) {
+                             sharedPreferences.edit().putString("user_role", role).apply();
+                              
+                             if ("admin".equals(role)) {
+                                 Intent intent = new Intent(MainActivity.this, com.example.skillverse_android.admin.AdminDashboardActivity.class);
+                                 startActivity(intent);
+                                 finish();
+                             }
+                         }
+                     }
+                }
+            })
+            .addOnFailureListener(e -> {
+                 
+            });
     }
     private com.google.android.material.progressindicator.CircularProgressIndicator progressBar;
 
@@ -156,6 +193,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 headerView.getPaddingBottom()
             );
             return insets;
+        });
+
+        swipeHelper = new SwipeGestureHelper(this, () -> {
+            if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
         });
     }
 
@@ -287,6 +330,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return 0;
     }
     @Override
+    public boolean dispatchTouchEvent(android.view.MotionEvent ev) {
+        if (swipeHelper != null && swipeHelper.onTouchEvent(ev)) {
+            return true;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -337,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 });
                             }
                         } catch (Exception e) {
-                            // ignore UI update errors
+                             
                         }
                     } else {
                         if (llContinueLearningSection != null) llContinueLearningSection.setVisibility(View.GONE);

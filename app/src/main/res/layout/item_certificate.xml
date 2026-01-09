@@ -27,206 +27,259 @@
             android:padding="24dp">
 
             
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#1A365D"
-                android:layout_marginBottom="16dp" />
-
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="CERTIFICATE"
-                android:textColor="#1A365D"
-                android:textSize="14sp"
-                android:letterSpacing="0.3"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="OF COMPLETION"
-                android:textColor="#1A365D"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:fontFamily="serif"
-                android:layout_marginBottom="20dp" />
-
-            
-            <View
-                android:layout_width="120dp"
-                android:layout_height="1dp"
-                android:background="#C9A227"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp" />
-
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="This is to certify that"
-                android:textColor="#333333"
-                android:textSize="12sp"
-                android:fontFamily="serif"
-                android:layout_marginBottom="8dp" />
-
-            
-            <TextView
-                android:id="@+id/tvStudentName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="John Doe"
-                android:textColor="#1A365D"
-                android:textSize="24sp"
-                android:textStyle="bold|italic"
-                android:fontFamily="serif"
-                android:layout_marginBottom="8dp" />
-
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="has successfully completed the course"
-                android:textColor="#333333"
-                android:textSize="12sp"
-                android:fontFamily="serif"
-                android:layout_marginBottom="12dp" />
-
-            
-            <TextView
-                android:id="@+id/tvCourseName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Course Name"
-                android:textColor="#1A365D"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:layout_marginBottom="20dp" />
-
-            
-            <View
-                android:layout_width="80dp"
-                android:layout_height="1dp"
-                android:background="#C9A227"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp" />
-
             
             <LinearLayout
+                android:id="@+id/layoutActive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginBottom="12dp">
+                android:orientation="vertical">
 
-                
-                <LinearLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#1A365D"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:text="CERTIFICATE"
+                    android:textColor="#1A365D"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.3"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="OF COMPLETION"
+                    android:textColor="#1A365D"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:fontFamily="serif"
+                    android:layout_marginBottom="20dp" />
+
+                <View
+                    android:layout_width="120dp"
+                    android:layout_height="1dp"
+                    android:background="#C9A227"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="This is to certify that"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:fontFamily="serif"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/tvStudentName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="John Doe"
+                    android:textColor="#1A365D"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    android:fontFamily="serif"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="has successfully completed the course"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:fontFamily="serif"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/tvCourseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Course Name"
+                    android:textColor="#1A365D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="serif"
                     android:gravity="center"
-                    android:layout_marginEnd="32dp">
+                    android:layout_marginBottom="20dp" />
 
-                    <TextView
-                        android:id="@+id/tvDateCompleted"
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="1dp"
+                    android:background="#C9A227"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="December 30, 2024"
-                        android:textColor="#333333"
-                        android:textSize="12sp"
-                        android:fontFamily="serif" />
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="32dp">
 
-                    <View
-                        android:layout_width="80dp"
-                        android:layout_height="1dp"
-                        android:background="#666666"
-                        android:layout_marginTop="4dp" />
+                        <TextView
+                            android:id="@+id/tvDateCompleted"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="December 30, 2024"
+                            android:textColor="#333333"
+                            android:textSize="12sp"
+                            android:fontFamily="serif" />
 
-                    <TextView
+                        <View
+                            android:layout_width="80dp"
+                            android:layout_height="1dp"
+                            android:background="#666666"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date"
+                            android:textColor="#666666"
+                            android:textSize="10sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Date"
-                        android:textColor="#666666"
-                        android:textSize="10sp"
-                        android:layout_marginTop="2dp" />
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tvScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100%"
+                            android:textColor="#C9A227"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:fontFamily="serif" />
+
+                        <View
+                            android:layout_width="60dp"
+                            android:layout_height="1dp"
+                            android:background="#666666"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Score"
+                            android:textColor="#666666"
+                            android:textSize="10sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvCertificateId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:layout_gravity="center"
+                    android:text="Certificate ID: CERT-2024-001"
+                    android:textColor="#999999"
+                    android:textSize="10sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginBottom="16dp" />
 
-                    <TextView
-                        android:id="@+id/tvScore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="100%"
-                        android:textColor="#C9A227"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:fontFamily="serif" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#1A365D"
+                    android:layout_marginBottom="12dp" />
 
-                    <View
-                        android:layout_width="60dp"
-                        android:layout_height="1dp"
-                        android:background="#666666"
-                        android:layout_marginTop="4dp" />
+                
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Score"
-                        android:textColor="#666666"
-                        android:textSize="10sp"
-                        android:layout_marginTop="2dp" />
-                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDownload"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:text="Download Certificate"
+                    android:textColor="#1A365D"
+                    android:textSize="12sp"
+                    app:strokeColor="#1A365D"
+                    app:strokeWidth="1dp"
+                    app:cornerRadius="4dp"
+                    app:icon="@android:drawable/stat_sys_download"
+                    app:iconTint="#1A365D" />
+
             </LinearLayout>
 
             
-            <TextView
-                android:id="@+id/tvCertificateId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Certificate ID: CERT-2024-001"
-                android:textColor="#999999"
-                android:textSize="10sp"
-                android:fontFamily="monospace"
-                android:layout_marginBottom="16dp" />
-
-            
-            <View
+            <LinearLayout
+                android:id="@+id/layoutRevoked"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#1A365D"
-                android:layout_marginBottom="12dp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp"
+                android:visibility="gone">
 
-            
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDownload"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:text="Download Certificate"
-                android:textColor="#1A365D"
-                android:textSize="12sp"
-                app:strokeColor="#1A365D"
-                app:strokeWidth="1dp"
-                app:cornerRadius="4dp"
-                app:icon="@android:drawable/stat_sys_download"
-                app:iconTint="#1A365D" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚠️"
+                    android:textSize="48sp"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Certificate Revoked"
+                    android:textColor="#D32F2F"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvRevokedCourseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Course Title"
+                    android:textColor="#1A365D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvRevokedReasonDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reason: Violation of Terms"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact administrator for assistance"
+                    android:textColor="#666666"
+                    android:textSize="12sp"/>
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

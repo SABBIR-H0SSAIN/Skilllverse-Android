@@ -34,7 +34,7 @@ public class LoadingUtils {
                 try {
                     dialog.dismiss();
                 } catch (Exception e) {
-                    // Handle potential window leaks/race conditions
+                     
                 }
             }
             dialog = null;

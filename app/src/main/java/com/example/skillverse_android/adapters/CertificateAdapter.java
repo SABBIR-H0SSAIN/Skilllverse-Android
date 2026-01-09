@@ -35,9 +35,12 @@ public class CertificateAdapter extends RecyclerView.Adapter<CertificateAdapter.
     public int getItemCount() {
         return certificates.size();
     }
+
     class CertificateViewHolder extends RecyclerView.ViewHolder {
-        TextView tvCourseName, tvStudentName, tvDateCompleted, tvScore, tvCertificateId;
+        TextView tvCourseName, tvStudentName, tvDateCompleted, tvScore, tvCertificateId, tvRevokedReasonDisplay, tvRevokedCourseName;
         MaterialButton btnDownload;
+        android.widget.LinearLayout layoutActive, layoutRevoked;
+
         CertificateViewHolder(@NonNull View itemView) {
             super(itemView);
             tvCourseName = itemView.findViewById(R.id.tvCourseName);
@@ -45,19 +48,35 @@ public class CertificateAdapter extends RecyclerView.Adapter<CertificateAdapter.
             tvDateCompleted = itemView.findViewById(R.id.tvDateCompleted);
             tvScore = itemView.findViewById(R.id.tvScore);
             tvCertificateId = itemView.findViewById(R.id.tvCertificateId);
+            tvRevokedReasonDisplay = itemView.findViewById(R.id.tvRevokedReasonDisplay);
+            tvRevokedCourseName = itemView.findViewById(R.id.tvRevokedCourseName);
             btnDownload = itemView.findViewById(R.id.btnDownload);
+            layoutActive = itemView.findViewById(R.id.layoutActive);
+            layoutRevoked = itemView.findViewById(R.id.layoutRevoked);
         }
+
         void bind(Certificate certificate) {
-            tvCourseName.setText(certificate.getCourseName());
-            tvStudentName.setText(certificate.getStudentName());
-            tvDateCompleted.setText(certificate.getDateCompleted());
-            tvScore.setText(String.format("%d%%", (int)certificate.getScore()));
-            tvCertificateId.setText("Certificate ID: " + certificate.getCertificateId());
-            btnDownload.setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.onDownloadClick(certificate);
-                }
-            });
+            if (certificate.isRevoked()) {
+                layoutActive.setVisibility(View.GONE);
+                layoutRevoked.setVisibility(View.VISIBLE);
+                tvRevokedReasonDisplay.setText("Reason: " + certificate.getRevokeReason());
+                tvRevokedCourseName.setText(certificate.getCourseName());
+            } else {
+                layoutActive.setVisibility(View.VISIBLE);
+                layoutRevoked.setVisibility(View.GONE);
+                
+                tvCourseName.setText(certificate.getCourseName());
+                tvStudentName.setText(certificate.getStudentName());
+                tvDateCompleted.setText(certificate.getDateCompleted());
+                tvScore.setText(String.format("%d%%", (int)certificate.getScore()));
+                tvCertificateId.setText("Certificate ID: " + certificate.getCertificateId());
+                
+                btnDownload.setOnClickListener(v -> {
+                    if (listener != null) {
+                        listener.onDownloadClick(certificate);
+                    }
+                });
+            }
         }
     }
 }

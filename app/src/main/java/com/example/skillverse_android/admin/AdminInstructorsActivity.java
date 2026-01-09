@@ -78,6 +78,7 @@ public class AdminInstructorsActivity extends AppCompatActivity {
         }
     }
     private void startListening() {
+        fetchCourses();  
         if (instructorListener != null) return;
         instructorListener = AdminFirestoreRepository.listenToInstructors((queryDocumentSnapshots, e) -> {
             if (e != null) {
@@ -91,6 +92,7 @@ public class AdminInstructorsActivity extends AppCompatActivity {
                     instructor.setId(document.getId());
                     instructorList.add(instructor);
                 }
+                calculateCourseCounts();  
                 adapter.notifyDataSetChanged();
             }
         });
@@ -101,11 +103,52 @@ public class AdminInstructorsActivity extends AppCompatActivity {
             public void onSuccess(Void data) {
                 Toast.makeText(AdminInstructorsActivity.this, "Instructor deleted", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailure(String error) {
                 Toast.makeText(AdminInstructorsActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private java.util.List<com.example.skillverse_android.models.Course> allCourses = new ArrayList<>();
+
+    private void fetchCourses() {
+        AdminFirestoreRepository.getAllCourses(new AdminFirestoreRepository.DataCallback<List<com.example.skillverse_android.models.Course>>() {
+            @Override
+            public void onSuccess(List<com.example.skillverse_android.models.Course> courses) {
+                if (courses != null) {
+                    allCourses = courses;
+                    calculateCourseCounts();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+                 
+            }
+        });
+    }
+
+    private void calculateCourseCounts() {
+        if (instructorList.isEmpty()) return;
+        
+        for (Instructor instructor : instructorList) {
+            int count = 0;
+            if (allCourses != null) {
+                for (com.example.skillverse_android.models.Course course : allCourses) {
+                     
+                    List<String> instructorIds = course.getInstructorIds();
+                    if (instructorIds != null && instructorIds.contains(instructor.getId())) {
+                        count++;
+                    }
+                }
+            }
+            instructor.setCoursesCount(count);
+        }
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
