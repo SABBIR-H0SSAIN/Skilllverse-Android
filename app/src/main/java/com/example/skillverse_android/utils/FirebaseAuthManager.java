@@ -12,6 +12,33 @@ public class FirebaseAuthManager {
         void onSuccess(FirebaseUser user);
         void onFailure(String error);
     }
+
+    public static void reauthenticateAndUpdatePassword(String oldPassword, String newPassword, AuthCallback callback) {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null && user.getEmail() != null) {
+            com.google.firebase.auth.AuthCredential credential = com.google.firebase.auth.EmailAuthProvider
+                .getCredential(user.getEmail(), oldPassword);
+
+            user.reauthenticate(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        user.updatePassword(newPassword)
+                            .addOnCompleteListener(updateTask -> {
+                                if (updateTask.isSuccessful()) {
+                                    callback.onSuccess(user);
+                                } else {
+                                    callback.onFailure(updateTask.getException() != null ? updateTask.getException().getMessage() : "Password update failed");
+                                }
+                            });
+                    } else {
+                        callback.onFailure("Current password incorrect");
+                    }
+                });
+        } else {
+            callback.onFailure("Authentication failed");
+        }
+    }
+
     public static void registerUser(String email, String password, String name, AuthCallback callback) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(task -> {
@@ -72,5 +99,40 @@ public class FirebaseAuthManager {
             .set(userProfile)
             .addOnSuccessListener(aVoid -> onSuccess.run())
             .addOnFailureListener(e -> onFailure.accept(e.getMessage()));
+    }
+
+    public static void updatePassword(String newPassword, AuthCallback callback) {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            user.updatePassword(newPassword)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(user);
+                    } else {
+                        callback.onFailure(task.getException() != null ? task.getException().getMessage() : "Password update failed");
+                    }
+                });
+        } else {
+            callback.onFailure("No user logged in");
+        }
+    }
+
+    public static void updateDisplayName(String newName, AuthCallback callback) {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(newName)
+                .build();
+            user.updateProfile(profileUpdates)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(user);
+                    } else {
+                        callback.onFailure(task.getException() != null ? task.getException().getMessage() : "Name update failed");
+                    }
+                });
+        } else {
+            callback.onFailure("No user logged in");
+        }
     }
 }

@@ -204,6 +204,29 @@ public class ModuleDetailActivity extends AppCompatActivity {
             }
         );
         loadResourcesForCurrentModule(currentModule);
+        
+        // Update Last Accessed
+        String userIdLastAccessed = com.example.skillverse_android.utils.FirebaseAuthManager.getCurrentUser().getUid();
+        String modId = currentModule.getDocumentId() != null ? currentModule.getDocumentId() : String.valueOf(currentModule.getId());
+        
+        com.example.skillverse_android.utils.FirestoreRepository.updateLastAccessed(
+            userIdLastAccessed,
+            courseDocId,
+            courseTitle,
+            modId,
+            currentModule.getTitle(),
+            new com.example.skillverse_android.utils.FirestoreRepository.DataCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean data) {
+                    // Last accessed updated silently
+                }
+
+                @Override
+                public void onFailure(String error) {
+                    // Ignore failure for last accessed update
+                }
+            }
+        );
     }
     private void loadYouTubeVideo() {
         if (currentModule == null) return;

@@ -74,6 +74,45 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        updateAdminInfo();
+    }
+
+    private void updateAdminInfo() {
+        View headerView = navigationView.getHeaderView(0);
+        TextView navHeaderName = headerView.findViewById(R.id.nav_header_admin_name);
+        TextView navHeaderEmail = headerView.findViewById(R.id.nav_header_admin_email);
+
+        com.google.firebase.auth.FirebaseUser currentUser = FirebaseAuthManager.getCurrentUser();
+        if (currentUser != null) {
+            String email = currentUser.getEmail();
+            navHeaderEmail.setText(email);
+
+            // Try to set initial name from Auth
+            String displayName = currentUser.getDisplayName();
+            if (displayName != null && !displayName.isEmpty()) {
+                navHeaderName.setText(displayName);
+            } else if (email != null) {
+                String nameFromEmail = email.split("@")[0];
+                navHeaderName.setText(nameFromEmail.substring(0, 1).toUpperCase() + nameFromEmail.substring(1));
+            } else {
+                navHeaderName.setText("Admin");
+            }
+
+            // Fetch latest from Firestore
+            db.collection("users").document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String name = documentSnapshot.getString("name");
+                        if (name != null && !name.isEmpty()) {
+                            navHeaderName.setText(name);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Keep existing/auth name on failure
+                });
+        }
     }
     private void setupQuickActions() {
         if (cardManageCourses != null) {

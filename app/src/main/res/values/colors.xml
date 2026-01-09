@@ -64,4 +64,14 @@
     
     <color name="shimmer_base">#E0E0E0</color>
     <color name="shimmer_highlight">#F5F5F5</color>
+    <color name="rounded_white_bg">#FFFFFFFF</color>
+    
+    <!-- New Colors for Quick Actions -->
+    <color name="accent_purple_new">#9C27B0</color>
+    <color name="gradient_purple_start">#BA68C8</color>
+    <color name="gradient_purple_end">#7B1FA2</color>
+
+    <color name="accent_orange_new">#FF9800</color>
+    <color name="gradient_orange_start_new">#FFB74D</color>
+    <color name="gradient_orange_end_new">#F57C00</color>
 </resources>

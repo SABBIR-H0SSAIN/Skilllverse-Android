@@ -38,7 +38,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private MaterialToolbar toolbar;
     private TextView tvWelcome;
     private CardView cardMyCoursesAction;
-    private CardView cardBrowseAction;
+    private CardView cardBrowseAction, cardCertificatesAction, cardProfileAction;
+
+
+
+
+    private MaterialCardView cardContinueLearning;
+    private TextView tvContinueCourseTitle;
+    private TextView tvContinueModuleTitle;
+    private android.widget.LinearLayout llContinueLearningSection;
+
+
+    private void setupQuickActions() {
+        cardMyCoursesAction.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MyCoursesActivity.class);
+            startActivity(intent);
+        });
+        cardBrowseAction.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BrowseCoursesActivity.class);
+            startActivity(intent);
+        });
+        cardCertificatesAction.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MyCertificatesActivity.class);
+            startActivity(intent);
+        });
+        cardProfileAction.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
+    }
     private RecyclerView rvRecentCourses;
     private MaterialCardView cardEmptyState;
     private CourseAdapter recentCoursesAdapter;
@@ -63,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        // Removed automatic reloading to improve performance
+        loadLastAccessed();
     }
     private com.google.android.material.progressindicator.CircularProgressIndicator progressBar;
 
@@ -75,6 +103,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvWelcome = findViewById(R.id.tvWelcome);
         cardMyCoursesAction = findViewById(R.id.cardMyCoursesAction);
         cardBrowseAction = findViewById(R.id.cardBrowseAction);
+        cardCertificatesAction = findViewById(R.id.cardCertificatesAction);
+        cardProfileAction = findViewById(R.id.cardProfileAction);
+        
+        llContinueLearningSection = findViewById(R.id.llContinueLearningSection);
+        cardContinueLearning = findViewById(R.id.cardContinueLearning);
+        tvContinueCourseTitle = findViewById(R.id.tvContinueCourseTitle);
+        tvContinueModuleTitle = findViewById(R.id.tvContinueModuleTitle);
+        
         rvRecentCourses = findViewById(R.id.rvRecentCourses);
         cardEmptyState = findViewById(R.id.cardEmptyState);
         setSupportActionBar(toolbar);
@@ -106,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        // FORCE ICONS TO RENDER WITH ORIGINAL COLORS (Fix for "gray/disabled" look)
+
         navigationView.setItemIconTintList(null);
         
         navigationView.setNavigationItemSelectedListener(this);
@@ -122,16 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return insets;
         });
     }
-    private void setupQuickActions() {
-        cardMyCoursesAction.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MyCoursesActivity.class);
-            startActivity(intent);
-        });
-        cardBrowseAction.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, BrowseCoursesActivity.class);
-            startActivity(intent);
-        });
-    }
+
     private void updateUserInfo() {
         String userEmail = sharedPreferences.getString(KEY_USER_EMAIL, "student@example.com");
         String userId = FirebaseAuthManager.getCurrentUser().getUid();
@@ -194,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        // Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
         navigateToLogin();
     }
     private boolean isUserLoggedIn() {
@@ -266,5 +293,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void loadLastAccessed() {
+        String userId = FirebaseAuthManager.getCurrentUser().getUid();
+        com.example.skillverse_android.utils.FirestoreRepository.getLastAccessed(userId,
+            new com.example.skillverse_android.utils.FirestoreRepository.DataCallback<java.util.Map<String, Object>>() {
+                @Override
+                public void onSuccess(java.util.Map<String, Object> data) {
+                    if (data != null && data.containsKey("courseId") && data.containsKey("moduleId")) {
+                        String courseId = (String) data.get("courseId");
+                        String courseTitle = (String) data.get("courseTitle");
+                        String moduleId = (String) data.get("moduleId");
+                        String moduleTitle = (String) data.get("moduleTitle");
+
+                        try {
+                            if (tvContinueCourseTitle != null && courseTitle != null) {
+                                tvContinueCourseTitle.setText(courseTitle);
+                            }
+                            
+                            if (tvContinueModuleTitle != null && moduleTitle != null) {
+                                tvContinueModuleTitle.setText(moduleTitle);
+                            }
+                            
+                            if (llContinueLearningSection != null) {
+                                llContinueLearningSection.setVisibility(View.VISIBLE);
+                            }
+
+                            if (cardContinueLearning != null) {
+                                cardContinueLearning.setOnClickListener(v -> {
+                                    Intent intent = new Intent(MainActivity.this, ModuleDetailActivity.class);
+                                    int courseIdInt = 1;
+                                    try {
+                                        courseIdInt = Integer.parseInt(courseId);
+                                    } catch (NumberFormatException e) {
+                                        courseIdInt = Math.abs(courseId.hashCode());
+                                    }
+                                    intent.putExtra(ModuleDetailActivity.EXTRA_COURSE_ID, courseIdInt);
+                                    intent.putExtra(ModuleDetailActivity.EXTRA_COURSE_DOC_ID, courseId);
+                                    intent.putExtra(ModuleDetailActivity.EXTRA_COURSE_TITLE, courseTitle);
+                                    intent.putExtra(ModuleDetailActivity.EXTRA_MODULE_ID, moduleId);
+                                    startActivity(intent);
+                                });
+                            }
+                        } catch (Exception e) {
+                            // ignore UI update errors
+                        }
+                    } else {
+                        if (llContinueLearningSection != null) llContinueLearningSection.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onFailure(String error) {
+                    if (llContinueLearningSection != null) llContinueLearningSection.setVisibility(View.GONE);
+                }
+            });
     }
 }

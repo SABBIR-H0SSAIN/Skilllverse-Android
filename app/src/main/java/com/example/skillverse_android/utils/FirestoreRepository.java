@@ -611,4 +611,43 @@ public class FirestoreRepository {
             }
         });
     }
+
+    public static void updateUserName(String userId, String newName, DataCallback<Boolean> callback) {
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("name", newName);
+        db.collection("users").document(userId)
+            .update(updates)
+            .addOnSuccessListener(aVoid -> callback.onSuccess(true))
+            .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+    }
+
+    public static void updateLastAccessed(String userId, String courseId, String courseTitle, String moduleId, String moduleTitle, DataCallback<Boolean> callback) {
+        Map<String, Object> lastAccessed = new HashMap<>();
+        lastAccessed.put("courseId", courseId);
+        lastAccessed.put("courseTitle", courseTitle);
+        lastAccessed.put("moduleId", moduleId);
+        lastAccessed.put("moduleTitle", moduleTitle);
+        lastAccessed.put("timestamp", System.currentTimeMillis());
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("lastAccessed", lastAccessed);
+
+        db.collection("users").document(userId)
+            .update(updates)
+            .addOnSuccessListener(aVoid -> callback.onSuccess(true))
+            .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+    }
+
+    public static void getLastAccessed(String userId, DataCallback<Map<String, Object>> callback) {
+        db.collection("users").document(userId)
+            .get()
+            .addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists() && documentSnapshot.contains("lastAccessed")) {
+                    callback.onSuccess((Map<String, Object>) documentSnapshot.get("lastAccessed"));
+                } else {
+                    callback.onSuccess(null);
+                }
+            })
+            .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+    }
 }
