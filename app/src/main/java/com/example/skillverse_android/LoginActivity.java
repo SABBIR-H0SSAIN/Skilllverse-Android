@@ -121,7 +121,8 @@ public class LoginActivity extends AppCompatActivity {
         AdminAuthManager.getUserRole(new AdminAuthManager.OnRoleCheckListener() {
             @Override
             public void onRoleCheckComplete(String role) {
-                 
+                boolean isAdminSelected = binding.rbAdmin.isChecked();
+
                 getSharedPreferences(PREF_NAME, MODE_PRIVATE)
                     .edit()
                     .putString(KEY_USER_ROLE, role)
@@ -131,12 +132,15 @@ public class LoginActivity extends AppCompatActivity {
                     binding.btnLogin.setEnabled(true);
                     binding.btnLogin.setText(R.string.login_button);
                 }
-                if ("admin".equals(role)) {
-                    navigateToAdminDashboard();
 
+                if (isAdminSelected) {
+                    if ("admin".equals(role)) {
+                        navigateToAdminDashboard();
+                    } else {
+                        navigateToMainActivity();
+                    }
                 } else {
                     navigateToMainActivity();
-
                 }
             }
         });

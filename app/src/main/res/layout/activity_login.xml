@@ -36,6 +36,37 @@
         android:textColor="@color/text_secondary"
         android:textSize="14sp" />
 
+
+    <RadioGroup
+        android:id="@+id/rgUserRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:checked="true"
+            android:layout_marginEnd="24dp"
+            android:buttonTint="#1E88E5"
+            android:textColor="#1E88E5"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:buttonTint="#1E88E5"
+            android:textColor="#1E88E5"
+            android:color="@color/primary_blue"
+            android:textSize="16sp" />
+    </RadioGroup>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInputLayout"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"

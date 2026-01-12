@@ -263,8 +263,9 @@ public class ModuleDetailActivity extends AppCompatActivity implements Navigatio
             }).start();
         }
         
-        btnPreviousModule.setEnabled(currentModuleIndex > 0);
-        btnNextModule.setEnabled(currentModuleIndex < modules.size() - 1);
+        // Buttons remain enabled to show Toast on boundary clicks
+        // btnPreviousModule.setEnabled(currentModuleIndex > 0);
+        // btnNextModule.setEnabled(currentModuleIndex < modules.size() - 1);
         updateMarkCompletedButton(currentModule);
         String userId = com.example.skillverse_android.utils.FirebaseAuthManager.getCurrentUser().getUid();
         com.example.skillverse_android.utils.ProgressCacheManager cacheManager =
@@ -440,12 +441,16 @@ public class ModuleDetailActivity extends AppCompatActivity implements Navigatio
         if (currentModuleIndex > 0) {
             currentModuleIndex--;
             displayCurrentModule();
+        } else {
+            Toast.makeText(this, "No previous modules", Toast.LENGTH_SHORT).show();
         }
     }
     private void navigateToNextModule() {
         if (currentModuleIndex < modules.size() - 1) {
             currentModuleIndex++;
             displayCurrentModule();
+        } else {
+            Toast.makeText(this, "No more modules", Toast.LENGTH_SHORT).show();
         }
     }
     private void checkCourseCompletionAndAwardCertificate(String userId) {
