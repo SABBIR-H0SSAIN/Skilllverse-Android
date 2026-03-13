@@ -29,12 +29,11 @@ Welcome to the **Skillverse Android** app! This is a modern, feature-rich e-lear
 
 ## 📸 Screenshots
 
-|<img src="screenshots/1.jpeg" width="200"/>|<img src="screenshots/2.jpeg" width="200"/>|<img src="screenshots/3.jpeg" width="200"/>|<img src="screenshots/4.jpeg" width="200"/>|
-|:---:|:---:|:---:|:---:|
-|<img src="screenshots/5.jpeg" width="200"/>|<img src="screenshots/6.jpeg" width="200"/>|<img src="screenshots/7.jpeg" width="200"/>|<img src="screenshots/8.jpeg" width="200"/>|
-|<img src="screenshots/9.jpeg" width="200"/>|<img src="screenshots/10.jpeg" width="200"/>|<img src="screenshots/11.jpeg" width="200"/>|<img src="screenshots/12.jpeg" width="200"/>|
-|<img src="screenshots/13.jpeg" width="200"/>|<img src="screenshots/14.jpeg" width="200"/>|<img src="screenshots/15.jpeg" width="200"/>|<img src="screenshots/16.jpeg" width="200"/>|
-|<img src="screenshots/17.jpeg" width="200"/>|<img src="screenshots/18.jpeg" width="200"/>|<img src="screenshots/19.jpeg" width="200"/>|<img src="screenshots/20.jpeg" width="200"/>|
+|<img src="screenshots/1.jpeg" width="150"/>|<img src="screenshots/2.jpeg" width="150"/>|<img src="screenshots/3.jpeg" width="150"/>|<img src="screenshots/4.jpeg" width="150"/>|<img src="screenshots/5.jpeg" width="150"/>|
+|:---:|:---:|:---:|:---:|:---:|
+|<img src="screenshots/6.jpeg" width="150"/>|<img src="screenshots/7.jpeg" width="150"/>|<img src="screenshots/8.jpeg" width="150"/>|<img src="screenshots/9.jpeg" width="150"/>|<img src="screenshots/10.jpeg" width="150"/>|
+|<img src="screenshots/11.jpeg" width="150"/>|<img src="screenshots/12.jpeg" width="150"/>|<img src="screenshots/13.jpeg" width="150"/>|<img src="screenshots/14.jpeg" width="150"/>|<img src="screenshots/15.jpeg" width="150"/>|
+|<img src="screenshots/16.jpeg" width="150"/>|<img src="screenshots/17.jpeg" width="150"/>|<img src="screenshots/18.jpeg" width="150"/>|<img src="screenshots/19.jpeg" width="150"/>|<img src="screenshots/20.jpeg" width="150"/>|
 
 ## 🚀 Getting Started
 
